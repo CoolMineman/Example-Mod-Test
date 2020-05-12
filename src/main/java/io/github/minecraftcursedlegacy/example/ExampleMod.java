@@ -3,12 +3,16 @@ package io.github.minecraftcursedlegacy.example;
 import java.io.IOException;
 
 import io.github.minecraftcursedlegacy.api.config.Configs;
+import io.github.minecraftcursedlegacy.api.networking.PluginChannel;
+import io.github.minecraftcursedlegacy.api.networking.PluginChannelRegistry;
 import io.github.minecraftcursedlegacy.api.registry.Id;
 import net.fabricmc.api.ModInitializer;
 import tk.valoeghese.zoesteriaconfig.api.container.WritableConfig;
 import tk.valoeghese.zoesteriaconfig.api.template.ConfigTemplate;
 
 public class ExampleMod implements ModInitializer {
+	public static PluginChannel channel = new EpicChannel();
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -28,6 +32,7 @@ public class ExampleMod implements ModInitializer {
 		}
 
 		System.out.println(config.getDoubleValue("exampleContainer.someData"));
+		PluginChannelRegistry.registerPluginChannel(channel);
 	}
 
 	private static WritableConfig config;
